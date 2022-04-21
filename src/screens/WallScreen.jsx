@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
-import { writeOnWall } from '../util/Wallet';
+import { writeOnWall, getConnectedAccounts } from '../util/Wallet';
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
 import ethLogo from '../assets/images/ETH.png';
@@ -12,11 +12,36 @@ const WallScreen = () => {
     const [msg, setMsg] = useState("");
     const [price, setPrice] = useState("");
 
+    const [accounts, setAccounts] = useState([]);
+    const [owner, setOwner] = useState("");
+    const [isMine, setIsMine] = useState(false);
+
     useEffect(() => {
         contract.writePrice(tokenId).then((data) => {
             setPrice(ethers.utils.formatEther(data));
         });
+        contract.ownerOf(tokenId).then((owner) => {
+            console.log(`owner is ${owner}`)
+            setOwner(owner);
+        })
     }, [tokenId]);
+
+    useEffect(() => {
+        setIsMine(false);
+        for(const a of accounts) {
+            console.log(`Comparing ${a} and ${owner}`);
+            if (a.toLowerCase() === owner.toLowerCase()) {
+                setIsMine(true);
+            }
+        }
+    }, [owner, accounts])
+
+    useEffect(() => {
+        getConnectedAccounts().then((accounts) => {
+            setAccounts(accounts);
+            console.log(accounts);
+        });
+    }, [])
 
     const SetPriceField = () => (
         <div
@@ -27,6 +52,13 @@ const WallScreen = () => {
                 marginBottom: 30
             }}
         >
+            <Typography
+                sx={{
+                    mr: 2
+                }}
+            >
+                Wall owner can set the writing price!
+            </Typography>
             <TextField
                 label="New Price (ETH)"
                 variant='filled'
@@ -62,7 +94,8 @@ const WallScreen = () => {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                color: "white"
             }}
         >
             <Typography
@@ -135,11 +168,10 @@ const WallScreen = () => {
                 <Typography
                     variant='h7'
                 >
-                    Price: {price} ETH
+                    Writing Price: {price} ETH
                 </Typography>
             </div>
-
-            <SetPriceField />
+            {isMine ? <SetPriceField /> : null}
 
             <Box sx={{
                     height: "50px"

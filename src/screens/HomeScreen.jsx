@@ -17,7 +17,8 @@ const HomeScreen = () => {
         <div style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
+            color: "white"
         }}>
             <Typography
                 variant='h2'
@@ -25,7 +26,7 @@ const HomeScreen = () => {
                     my: 10
                 }}
             >
-                Home Screen
+                Project Dambyurak
             </Typography>
 
             <div style={{

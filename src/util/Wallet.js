@@ -11,6 +11,11 @@ function setupContract() {
     contract = new ethers.Contract(CONTRACT_ADDR, CONTRACT_ABI, signer);    
 }
 
+export async function getConnectedAccounts() {
+    const accounts = await window.ethereum.request({ method: "eth_accounts" });
+    return accounts;
+}
+
 export async function checkConnection() {
     if (typeof window.ethereum !== 'undefined') {
         const permissions = await window.ethereum.request({
