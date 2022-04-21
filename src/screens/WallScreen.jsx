@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
-import { writeOnWall, getConnectedAccounts } from '../util/Wallet';
+import { writeOnWall, getConnectedAccounts, subscribeTo } from '../util/Wallet';
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
 import ethLogo from '../assets/images/ETH.png';
@@ -39,8 +39,10 @@ const WallScreen = () => {
     useEffect(() => {
         getConnectedAccounts().then((accounts) => {
             setAccounts(accounts);
-            console.log(accounts);
         });
+        subscribeTo('accountsChanged', (accounts) => {
+            setAccounts(accounts);
+        })
     }, [])
 
     const SetPriceField = () => (
@@ -146,7 +148,7 @@ const WallScreen = () => {
                         backgroundColor: 'tomato'
                     }}
                     onClick={async () => {
-                        const result = await writeOnWall(tokenId, msg);
+                        const result = await writeOnWall(tokenId, price, msg);
                         if(result) {
                             setMsg('');
                         }

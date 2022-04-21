@@ -4,6 +4,11 @@ import { ethers } from 'ethers';
 
 let provider, signer, contract;
 
+const CHAIN_CONFIG = {
+    chainId: '0x539',
+    chainName: 'Polygon Mumbai Testnet',
+    rpcUrls: ['https://rpc-mumbai.maticvigil.com']
+}
 
 function setupContract() {
     provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -14,6 +19,10 @@ function setupContract() {
 export async function getConnectedAccounts() {
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
     return accounts;
+}
+
+export function subscribeTo(event, callback) {
+    window.ethereum.on(event, callback);
 }
 
 export async function checkConnection() {
@@ -82,25 +91,67 @@ export async function connectMetaMask() {
     }
 }
 
-export async function writeOnWall(tokenId, content) {
+export async function switchChain() {
+    try {
+        await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{
+                chainId: CHAIN_CONFIG.chainId
+            }]
+        })
+        return true;
+    } catch (switchError) {
+        if(switchError.code === 4902) {
+            console.log('switchError' + switchError);
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [CHAIN_CONFIG]
+                })
+                return true;
+            }
+            catch(addError) {
+                console.log('addErrpr' + addError)
+                return false;
+            }
+        }
+        else {
+            console.log('switchError' + switchError);
+            return false;
+        }
+    }
+}
+
+export async function writeOnWall(tokenId, price, content) {
     const connected = await checkConnection();
     if(!connected) {
         return false;
     }
-    // TODO change to a correct network
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    console.log(chainId);
+    const chainCorrect = chainId === CHAIN_CONFIG.chainId;
+    if(!chainCorrect) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Chain is not correct',
+            text: "Please switch to Polygon Main Network",
+        });
+        return false;
+    }
     console.log(tokenId);
-    const price = await contract.writePrice(tokenId);
     console.log(price)
+    const ethPrice = ethers.utils.parseEther(price);
+    console.log(ethPrice)
     try {
         await contract.writeOnWall(tokenId, content, {
-            value: price
+            value: ethPrice
         });
         return true;
     } catch (err) {
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: err.message,
+            text: !err.data ? err.message : err.data.message,
         });
         return false;
     }
