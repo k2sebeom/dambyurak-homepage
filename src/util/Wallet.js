@@ -102,7 +102,6 @@ export async function switchChain() {
         return true;
     } catch (switchError) {
         if(switchError.code === 4902) {
-            console.log('switchError' + switchError);
             try {
                 await window.ethereum.request({
                     method: 'wallet_addEthereumChain',
@@ -111,12 +110,10 @@ export async function switchChain() {
                 return true;
             }
             catch(addError) {
-                console.log('addErrpr' + addError)
                 return false;
             }
         }
         else {
-            console.log('switchError' + switchError);
             return false;
         }
     }
@@ -129,7 +126,6 @@ export async function setWritePrice(tokenId, newPrice) {
         return false;
     }
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    console.log(chainId);
     const chainCorrect = chainId === CHAIN_CONFIG.chainId;
     if(!chainCorrect) {
         Swal.fire({
@@ -159,7 +155,6 @@ export async function writeOnWall(tokenId, price, content) {
         return false;
     }
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    console.log(chainId);
     const chainCorrect = chainId === CHAIN_CONFIG.chainId;
     if(!chainCorrect) {
         Swal.fire({
@@ -169,10 +164,7 @@ export async function writeOnWall(tokenId, price, content) {
         });
         return false;
     }
-    console.log(tokenId);
-    console.log(price)
     const ethPrice = ethers.utils.parseEther(price);
-    console.log(ethPrice)
     try {
         await contract.writeOnWall(tokenId, content, {
             value: ethPrice
