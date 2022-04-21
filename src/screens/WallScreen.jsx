@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
-import { writeOnWall, getConnectedAccounts, subscribeTo } from '../util/Wallet';
+import { writeOnWall, getConnectedAccounts, subscribeTo, setWritePrice } from '../util/Wallet';
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
 import ethLogo from '../assets/images/ETH.png';
@@ -11,6 +11,7 @@ const WallScreen = () => {
     let { tokenId } = useParams();
     const [msg, setMsg] = useState("");
     const [price, setPrice] = useState("");
+    const [newWritePrice, setNewWritePrice] = useState("");
 
     const [accounts, setAccounts] = useState([]);
     const [owner, setOwner] = useState("");
@@ -45,7 +46,7 @@ const WallScreen = () => {
         })
     }, [])
 
-    const SetPriceField = () => (
+    const SetPriceField = (
         <div
             style={{
                 display: "flex",
@@ -70,10 +71,10 @@ const WallScreen = () => {
                     mr: 2,
                     backgroundColor: 'white'
                 }}
-                value={msg}
+                value={newWritePrice}
                 onChange={(e) => {
-                    setMsg(e.target.value)
-                }}                
+                    setNewWritePrice(e.target.value)
+                }}
             />
             <Button
                 variant='contained'
@@ -83,7 +84,10 @@ const WallScreen = () => {
                     backgroundColor: 'tomato'
                 }}
                 onClick={async () => {
-                    
+                    const result = await setWritePrice(tokenId, newWritePrice);
+                    if (result) {
+                        window.location.reload();
+                    }
                 }}
             >
                 Confirm
@@ -173,7 +177,7 @@ const WallScreen = () => {
                     Writing Price: {price} ETH
                 </Typography>
             </div>
-            {isMine ? <SetPriceField /> : null}
+            {isMine ? SetPriceField : null}
 
             <Box sx={{
                     height: "50px"

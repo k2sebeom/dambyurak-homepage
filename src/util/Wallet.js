@@ -122,6 +122,37 @@ export async function switchChain() {
     }
 }
 
+
+export async function setWritePrice(tokenId, newPrice) {
+    const connected = await checkConnection();
+    if(!connected) {
+        return false;
+    }
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    console.log(chainId);
+    const chainCorrect = chainId === CHAIN_CONFIG.chainId;
+    if(!chainCorrect) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Chain is not correct',
+            text: "Please switch to Polygon Main Network",
+        });
+        return false;
+    }
+
+    try {
+        await contract.setWritePrice(tokenId, ethers.utils.parseEther(newPrice));
+        return true;
+    } catch (err) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: !err.data ? err.message : err.data.message,
+        });
+        return false;
+    }
+}
+
 export async function writeOnWall(tokenId, price, content) {
     const connected = await checkConnection();
     if(!connected) {

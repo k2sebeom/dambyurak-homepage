@@ -7,7 +7,8 @@ export const CONTRACT_ABI = [
     "function writeOnWall(uint256 _tokenId, string memory _content) public payable",
     "function writePrice(uint256 _tokenId) public view returns(uint256)",
     "function totalSupply() public view returns(uint256)",
-    "function ownerOf(uint256 _tokenId) public view returns(address)"
+    "function ownerOf(uint256 _tokenId) public view returns(address)",
+    "function setWritePrice(uint256 _tokenId, uint256 _price) public"
 ];
 
 export const PROVIDER_URL = "HTTP://127.0.0.1:8545";
