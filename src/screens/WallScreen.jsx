@@ -25,7 +25,6 @@ const WallScreen = () => {
         });
         contract.ownerOf(tokenId).then((owner) => {
             setOwner(owner);
-            console.log(owner);
         });
         contract.tokenURI(tokenId).then(async (url) => {
             const resp = await fetch(url);
