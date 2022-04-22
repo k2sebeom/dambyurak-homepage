@@ -5,6 +5,7 @@ import { writeOnWall, getConnectedAccounts, subscribeTo, setWritePrice, isWallet
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
 import ethLogo from '../assets/images/MATIC.png';
+import { ipfsToGateway } from '../util/ipfs';
 
 
 const WallScreen = () => {
@@ -29,7 +30,7 @@ const WallScreen = () => {
         contract.tokenURI(tokenId).then(async (url) => {
             const resp = await fetch(url);
             const json = await resp.json();
-            setAnimation(json.animation_url);
+            setAnimation(ipfsToGateway(json.animation_url));
         });
     }, [tokenId]);
 

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Card, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import { contract } from '../../util/Ethers';
+import { ipfsToGateway } from '../../util/ipfs';
 
 
 const WallCard = ({ tokenId }) => {
@@ -12,7 +13,7 @@ const WallCard = ({ tokenId }) => {
         contract.tokenURI(tokenId).then(async (url) => {
             const resp = await fetch(url);
             const json = await resp.json();
-            setImageURL(json.image);
+            setImageURL(ipfsToGateway(json.image));
         })
     }, [tokenId]);
 
