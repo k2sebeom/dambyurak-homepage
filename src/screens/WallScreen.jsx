@@ -16,15 +16,20 @@ const WallScreen = () => {
     const [accounts, setAccounts] = useState([]);
     const [owner, setOwner] = useState("");
     const [isMine, setIsMine] = useState(false);
+    const [animation, setAnimation] = useState('');
 
     useEffect(() => {
         contract.writePrice(tokenId).then((data) => {
             setPrice(ethers.utils.formatEther(data));
         });
         contract.ownerOf(tokenId).then((owner) => {
-            console.log(`owner is ${owner}`)
             setOwner(owner);
-        })
+        });
+        contract.tokenURI(tokenId).then(async (url) => {
+            const resp = await fetch(url);
+            const json = await resp.json();
+            setAnimation(json.animation_url);
+        });
     }, [tokenId]);
 
     useEffect(() => {
@@ -117,7 +122,7 @@ const WallScreen = () => {
 
             <iframe
                 title={`Dambyurak #${tokenId}`}
-                src={`http://localhost:8000?id=${tokenId}`}
+                src={animation}
                 height="510px"
                 width="510px"
             >

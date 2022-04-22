@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { contract } from '../../util/Ethers';
 
 
 const WallCard = ({ tokenId }) => {
     const navigate = useNavigate();
+    const [imageURL, setImageURL] = React.useState('');
+
+    useEffect(() => {
+        contract.tokenURI(tokenId).then(async (url) => {
+            const resp = await fetch(url);
+            const json = await resp.json();
+            setImageURL(json.image);
+        })
+    }, [tokenId]);
 
     return (
         <Card
@@ -20,7 +30,8 @@ const WallCard = ({ tokenId }) => {
                     boxSizing: "border-box",
                     position: "relative",
                     height: "100%",
-                    backgroundImage: 'url(https://images.unsplash.com/photo-1547056961-3c25e9140b05?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YnJpY2slMjB3YWxsfGVufDB8fDB8fA%3D%3D&w=1000&q=80)'
+                    backgroundImage: `url(${imageURL})`,
+                    backgroundSize: 'cover'
                 }}
             >
                 <Button variant='contained' 

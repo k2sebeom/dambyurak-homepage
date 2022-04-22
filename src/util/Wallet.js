@@ -1,14 +1,8 @@
 import Swal from 'sweetalert2';
-import { CONTRACT_ABI, CONTRACT_ADDR } from '../constants/chain';
+import { CONTRACT_ABI, CONTRACT_ADDR, CHAIN_CONFIG } from '../constants/chain';
 import { ethers } from 'ethers';
 
 let provider, signer, contract;
-
-const CHAIN_CONFIG = {
-    chainId: '0x539',
-    chainName: 'Polygon Mumbai Testnet',
-    rpcUrls: ['https://rpc-mumbai.maticvigil.com']
-}
 
 function setupContract() {
     provider = new ethers.providers.Web3Provider(window.ethereum);
