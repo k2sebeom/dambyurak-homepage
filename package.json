@@ -2,7 +2,7 @@
   "name": "wall_page",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://k2sebeom.io/dambyurak-homepage",
+  "homepage": "https://k2sebeom.github.io/dambyurak-homepage/",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
