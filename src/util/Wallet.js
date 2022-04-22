@@ -129,7 +129,7 @@ export async function setWritePrice(tokenId, newPrice) {
         Swal.fire({
             icon: 'error',
             title: 'Chain is not correct',
-            text: "Please switch to Polygon Main Network",
+            text: `Please switch to ${CHAIN_CONFIG.chainName}`,
         });
         return false;
     }
@@ -158,7 +158,7 @@ export async function writeOnWall(tokenId, price, content) {
         Swal.fire({
             icon: 'error',
             title: 'Chain is not correct',
-            text: "Please switch to Polygon Main Network",
+            text: `Please switch to ${CHAIN_CONFIG.chainName}`,
         });
         return false;
     }

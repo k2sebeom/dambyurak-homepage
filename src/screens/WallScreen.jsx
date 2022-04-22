@@ -4,7 +4,7 @@ import { Typography, TextField, Button, Box } from '@mui/material';
 import { writeOnWall, getConnectedAccounts, subscribeTo, setWritePrice, isWalletAvailable } from '../util/Wallet';
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
-import ethLogo from '../assets/images/ETH.png';
+import ethLogo from '../assets/images/MATIC.png';
 
 
 const WallScreen = () => {
@@ -24,6 +24,7 @@ const WallScreen = () => {
         });
         contract.ownerOf(tokenId).then((owner) => {
             setOwner(owner);
+            console.log(owner);
         });
         contract.tokenURI(tokenId).then(async (url) => {
             const resp = await fetch(url);
@@ -36,6 +37,7 @@ const WallScreen = () => {
         setIsMine(false);
         for(const a of accounts) {
             if (a.toLowerCase() === owner.toLowerCase()) {
+                console.log(a.toLowerCase(), owner.toLowerCase());
                 setIsMine(true);
             }
         }
@@ -69,7 +71,7 @@ const WallScreen = () => {
                 Wall owner can set the writing price!
             </Typography>
             <TextField
-                label="New Price (ETH)"
+                label="New Price (MATIC)"
                 variant='filled'
                 sx={{
                     width: 200,
@@ -180,7 +182,7 @@ const WallScreen = () => {
                 <Typography
                     variant='h7'
                 >
-                    Writing Price: {price} ETH
+                    Writing Price: {price} MATIC
                 </Typography>
             </div>
             {isMine ? SetPriceField : null}
