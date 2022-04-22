@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, TextField, Button, Box } from '@mui/material';
-import { writeOnWall, getConnectedAccounts, subscribeTo, setWritePrice } from '../util/Wallet';
+import { writeOnWall, getConnectedAccounts, subscribeTo, setWritePrice, isWalletAvailable } from '../util/Wallet';
 import { contract } from '../util/Ethers';
 import { ethers } from 'ethers';
 import ethLogo from '../assets/images/ETH.png';
@@ -30,7 +30,6 @@ const WallScreen = () => {
     useEffect(() => {
         setIsMine(false);
         for(const a of accounts) {
-            console.log(`Comparing ${a} and ${owner}`);
             if (a.toLowerCase() === owner.toLowerCase()) {
                 setIsMine(true);
             }
@@ -38,12 +37,14 @@ const WallScreen = () => {
     }, [owner, accounts])
 
     useEffect(() => {
-        getConnectedAccounts().then((accounts) => {
-            setAccounts(accounts);
-        });
-        subscribeTo('accountsChanged', (accounts) => {
-            setAccounts(accounts);
-        })
+        if (isWalletAvailable()) {
+            getConnectedAccounts().then((accounts) => {
+                setAccounts(accounts);
+            });
+            subscribeTo('accountsChanged', (accounts) => {
+                setAccounts(accounts);
+            })
+        }
     }, [])
 
     const SetPriceField = (
@@ -152,7 +153,7 @@ const WallScreen = () => {
                         backgroundColor: 'tomato'
                     }}
                     onClick={async () => {
-                        const result = await writeOnWall(tokenId, price, msg);
+                        const result = await writeOnWall(tokenId, isMine ? '0.0' : price, msg);
                         if(result) {
                             setMsg('');
                         }

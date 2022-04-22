@@ -16,6 +16,10 @@ function setupContract() {
     contract = new ethers.Contract(CONTRACT_ADDR, CONTRACT_ABI, signer);    
 }
 
+export function isWalletAvailable() {
+    return typeof window.ethereum !== 'undefined';
+}
+
 export async function getConnectedAccounts() {
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
     return accounts;
