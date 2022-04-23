@@ -1,9 +1,7 @@
 
 
-export const CONTRACT_ADDR = "0x94681182d532400249342A7A98998B24Fa4F17Ad";
+export const CONTRACT_ADDR = "0x0DcC012331be316F2C0FCaFfc2d6d032311F5c2D";
 export const CONTRACT_ABI = [
-    "function nakseo(uint256 _tokenId, uint256 _msgId) view returns (address, string memory)",
-    "function nakseoCount(uint256 _tokenId) view returns (uint256)",
     "function writeOnWall(uint256 _tokenId, string memory _content) public payable",
     "function writePrice(uint256 _tokenId) public view returns(uint256)",
     "function totalSupply() public view returns(uint256)",
