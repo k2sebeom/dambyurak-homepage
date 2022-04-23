@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Card, Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import { getServedImageUrl } from '../../util/ipfs';
+import { contract } from '../../util/Ethers';
 
 
 const WallCard = ({ tokenId }) => {
@@ -9,7 +9,12 @@ const WallCard = ({ tokenId }) => {
     const [imageURL, setImageURL] = React.useState('');
 
     useEffect(() => {
-        setImageURL(getServedImageUrl(tokenId));
+        contract.assetURI(tokenId).then(async (url) => {
+            console.log(url);
+            const resp = await fetch(url);
+            const json = await resp.json();
+            setImageURL(json.image);
+        });
     }, [tokenId]);
 
     return (
