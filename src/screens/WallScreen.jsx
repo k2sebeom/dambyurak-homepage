@@ -33,6 +33,7 @@ const WallScreen = () => {
         });
     }, [tokenId]);
 
+    // Check if the wallet is Mine
     useEffect(() => {
         setIsMine(false);
         for(const a of accounts) {
