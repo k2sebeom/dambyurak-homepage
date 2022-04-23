@@ -29,7 +29,7 @@ const Header = () => {
                     color: "black"
                 }}
                 onClick={() => {
-                    navigate('/');
+                    navigate('');
                 }}
             >
                 Dambyurak

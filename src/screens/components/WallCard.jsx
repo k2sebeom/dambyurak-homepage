@@ -43,7 +43,7 @@ const WallCard = ({ tokenId }) => {
                         right: 10
                     }}
                     onClick={() => {
-                        navigate(`/${tokenId}`);
+                        navigate(`${tokenId}`);
                     }}
                 >
                     Dambyurak #{tokenId}

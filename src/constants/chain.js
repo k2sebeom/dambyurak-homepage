@@ -1,6 +1,6 @@
 
 
-export const CONTRACT_ADDR = "0x0DcC012331be316F2C0FCaFfc2d6d032311F5c2D";
+export const CONTRACT_ADDR = "0x2C4AA15027b99cA394Cd75558733Ac1fdD7D3Ae6";
 export const CONTRACT_ABI = [
     "function writeOnWall(uint256 _tokenId, string memory _content) public payable",
     "function writePrice(uint256 _tokenId) public view returns(uint256)",
@@ -10,10 +10,10 @@ export const CONTRACT_ABI = [
     "function assetURI(uint256 _tokenId) view public returns(string memory)"
 ];
 
-export const PROVIDER_URL = "HTTP://127.0.0.1:8545";
+export const PROVIDER_URL = "https://rpc-mumbai.maticvigil.com";
 
 export const CHAIN_CONFIG = {
-    chainId: '0x89',
+    chainId: '0x13881',
     chainName: 'Polygon Mainnet',
     rpcUrls: [PROVIDER_URL]
 }

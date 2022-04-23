@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MainScreen />}>
+        <Route path='dambyurak-homepage' element={<MainScreen />}>
           <Route path='' element={<HomeScreen />} />
           <Route path=':tokenId' element={<WallScreen />} />
         </Route>
