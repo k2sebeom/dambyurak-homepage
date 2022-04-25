@@ -143,7 +143,7 @@ const WallScreen = () => {
                     label="Leave your mark!"
                     variant='filled'
                     sx={{
-                        width: 500,
+                        width: "40vw",
                         height: 50,
                         mr: 2,
                         backgroundColor: 'white'

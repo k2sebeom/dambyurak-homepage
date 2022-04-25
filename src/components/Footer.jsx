@@ -14,6 +14,7 @@ const Footer = () => {
                 boxSizing: "border-box"
             }}
         >
+
         </div>
     )
 }
