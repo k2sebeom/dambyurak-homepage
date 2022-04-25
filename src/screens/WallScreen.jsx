@@ -61,7 +61,9 @@ const WallScreen = () => {
                 display: "flex",
                 alignItems: "center",
                 marginTop: 30,
-                marginBottom: 30
+                marginBottom: 30,
+                marginRight: 20,
+                marginLeft: 20
             }}
         >
             <Typography
