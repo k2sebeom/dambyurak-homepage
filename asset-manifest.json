@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/dambyurak-homepage/static/js/main.fd086e31.js",
+    "main.js": "/dambyurak-homepage/static/js/main.5bcc20df.js",
     "static/media/MATIC.png": "/dambyurak-homepage/static/media/MATIC.21acc0e5212966d9b862.png",
     "index.html": "/dambyurak-homepage/index.html",
-    "main.fd086e31.js.map": "/dambyurak-homepage/static/js/main.fd086e31.js.map"
+    "main.5bcc20df.js.map": "/dambyurak-homepage/static/js/main.5bcc20df.js.map"
   },
   "entrypoints": [
-    "static/js/main.fd086e31.js"
+    "static/js/main.5bcc20df.js"
   ]
 }
