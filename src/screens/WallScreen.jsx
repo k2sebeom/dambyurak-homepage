@@ -169,7 +169,7 @@ const WallScreen = () => {
                         }
                     }}
                 >
-                    Send
+                    Write
                 </Button>
             </div>
             
