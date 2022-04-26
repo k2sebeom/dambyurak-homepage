@@ -34,14 +34,14 @@ const HomeScreen = () => {
                 it gains its value much bigger than that without the signature. Project Dambyurak introduces a unique concept of a singable (or commentable) NFT on 
                 which anyone can leave a signature or a comment. Each comment and the writer of a comment are stored on a blockchain,
                 so the NFT itself includes the comments written on it. “Dambyurak (담벼락)” is a Korean word meaning “wall,” as it 
-                symbolizes a wall on a street on which pedestrians can write scribbles. The <a href="https://polygonscan.com/address/0x4352653ba4FC133f57EE53db683f1270F46bF1fd">Dambyurak smart contract </a> 
+                symbolizes a wall on a street on which pedestrians can write scribbles. The <a href="https://polygonscan.com/address/0x4B2FbEd0CcDea6DfA35C5557Cd670C11922198ED">Dambyurak smart contract </a> 
                 stores comments on the wall as “Nakseo (낙서),” a Korean word for scribbles on papers or walls. The more people leave their marks on the wall, the more it becomes unique, 
                 and thus, it accrues value as time passes. Project Dambyurak aims to embrace the same concept in the realm of NFT and blockchain.
             </Typography>
 
             <Typography variant='h6' sx={{ mb: 3, mx: 20, fontSize: 17 }}>
                 Project Dambyurak also introduces an interesting recursive concept NFT as the token itself is a BApp (Blockchain Application). 
-                The NFT tokenURI contains a link to BApp which displays all the comments written on the wall. You can check out the NFT on <a href="https://opensea.io/collection/dambyura">OpenSea </a> 
+                The NFT tokenURI contains a link to BApp which displays all the comments written on the wall. You can check out the NFT on <a href="https://opensea.io/collection/dambyurak">OpenSea </a> 
                 and find out that the NFT listed on the marketplace shows a responsive wall that shows all the comments written on it. 
                 With recent attempts to utilize NFTs for various purposes such as Play2Earn and Move2Earn, Project Dambyurak makes a novel attempt to utilize NFT itself as a blockchain application.
             </Typography>
