@@ -1,6 +1,6 @@
 
 
-export const CONTRACT_ADDR = "0x4352653ba4FC133f57EE53db683f1270F46bF1fd";
+export const CONTRACT_ADDR = "0x4B2FbEd0CcDea6DfA35C5557Cd670C11922198ED";
 export const CONTRACT_ABI = [
     "function writeOnWall(uint256 _tokenId, string memory _content) public payable",
     "function writePrice(uint256 _tokenId) public view returns(uint256)",
