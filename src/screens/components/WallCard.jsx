@@ -10,7 +10,6 @@ const WallCard = ({ tokenId }) => {
 
     useEffect(() => {
         contract.assetURI(tokenId).then(async (url) => {
-            console.log(url);
             const resp = await fetch(url);
             const json = await resp.json();
             setImageURL(json.image);
